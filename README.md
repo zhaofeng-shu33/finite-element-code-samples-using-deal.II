@@ -10,8 +10,8 @@ However, you still need to set the input file name,include directories and lib p
 For release build, change *CMAKE_BUILD_TYPE*  to Release in CMakeCache.txt
 
 ## Pre and Post Processing
-I use Python script to deal with some complexity of pre and post processing. For purpose of visualization, [http://www.gmsh.info](gmsh) is used for msh file
-and [http://www.paraview.org/](paraview) is used for vtk file.
+I use Python script to deal with some complexity of pre and post processing. For purpose of visualization, [gmsh](http://www.gmsh.info) is used for msh file
+and [paraview](http://www.paraview.org/) is used for vtk file.
 
 ## Acnowledgement
 For info about how to use deal.II, see [http://dealii.org/](http://dealii.org/)
