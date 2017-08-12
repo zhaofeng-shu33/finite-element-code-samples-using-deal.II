@@ -1,0 +1,6 @@
+\form#0:$\sin(\pi x)\sin(\pi y)$
+\form#1:$ -\epsilon f''(x)+\epsilon \pi^2 f(x) +f'(x)=\sin \pi x $
+\form#2:$ y''=1 $
+\form#3:$ y(0)=1,y(1)=-1$
+\form#4:$ \frac{E\mu}{1-\mu^2};$
+\form#5:$ f(x,y)=(3x+4y+2xy+1)exp(-\sqrt{x^2+y^2}) $
