@@ -1,0 +1,8 @@
+height	2
+width	1
+fracture_width	0.2
+YoungModulus	200
+PoissonRatio	0.3
+sigma	0.3
+input_mesh_fileName	rectangle.msh
+output_result_fileName	out.vtk

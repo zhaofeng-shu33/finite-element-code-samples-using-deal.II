@@ -7,6 +7,7 @@ namespace planar_beam_update{
 /** implementing symmetric constraints.
 * reducing computation cost
 */
+using namespace post_processing;
 template <int dim>
 class Beam
 {
@@ -91,13 +92,13 @@ void Beam<dim>::storeGradientToMap() {
 				myGradient[component_j] += solution[local_dof_indices[j]] * fe_values.shape_grad(j, i);
 			}
 			for (int k = 0; k<dim; k++) {
-				if (my_gradient_map<dim>.find(local_dof_indices[dim*i + k]) == my_gradient_map<dim>.end()) {//not found
-					my_gradient_map<dim>[local_dof_indices[dim*i + k]] = myGradient[k];
-					my_gradient_sum[local_dof_indices[dim*i + k]] = 1;
+				if (post_processing::my_gradient_map<dim>.find(local_dof_indices[dim*i + k]) == post_processing::my_gradient_map<dim>.end()) {//not found
+					post_processing::my_gradient_map<dim>[local_dof_indices[dim*i + k]] = myGradient[k];
+					post_processing::my_gradient_sum[local_dof_indices[dim*i + k]] = 1;
 				}
 				else {
-					my_gradient_map<dim>[local_dof_indices[dim*i + k]] += myGradient[k];
-					my_gradient_sum[local_dof_indices[dim*i + k]]++;
+					post_processing::my_gradient_map<dim>[local_dof_indices[dim*i + k]] += myGradient[k];
+					post_processing::my_gradient_sum[local_dof_indices[dim*i + k]]++;
 				}
 			}
 
@@ -140,7 +141,7 @@ void Beam<dim>::write_grid(char* fileName) {
 template <int dim>
 void Beam<dim>::run()
 {
-	read_grid("D:/cmake/CGAL/build/cgal_solution/Release/beam_triangulation.msh");
+	read_grid("beam_triangulation_update.msh");
 	//test_boundary();
 	//no need to refine the mesh
 	setup_system();
@@ -150,7 +151,7 @@ void Beam<dim>::run()
 	std::cout << "solve finished...\n";
 /*	setup_system_from_saved_solution();*/
 	storeGradientToMap();
-	output_results("solution_Beam.vtk");
+	output_results("solution_Beam_update.vtk");
 
 }
 template <int dim>
@@ -326,7 +327,7 @@ void Beam<dim>::output_results(char* fileName) const//post processing
 {
 	DataOut<dim> data_out;
 	data_out.attach_dof_handler(dof_handler);
-	ComputeStressField<dim> my_stress_field;
+	BeamPostProcessing my_stress_field;
 	data_out.add_data_vector(solution, my_stress_field);
 	data_out.build_patches();
 	std::ofstream output(fileName);

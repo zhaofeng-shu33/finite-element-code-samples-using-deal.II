@@ -751,7 +751,7 @@ int main (int argc,char** argv)
         }
     }
 
-    SPHERICAL_SHELL<3> sphere3D(argv[1], inner_radius, outer_radius, inner_pressure, YoungModulus, PoissonRatio, elementType, quadratureCnt, MaxNewtonStep,yield_strength);
+    ElastoPlastic::SPHERICAL_SHELL<3> sphere3D(argv[1], inner_radius, outer_radius, inner_pressure, YoungModulus, PoissonRatio, elementType, quadratureCnt, MaxNewtonStep,yield_strength);
     sphere3D.run(useSavedSolution);
 
 

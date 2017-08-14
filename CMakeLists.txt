@@ -2,16 +2,19 @@
 #  CMake script for the program:
 ##
 
-# Set the name of the project and target:
-SET(TARGET "planar_beam")
+# Set the name of the src file
+SET(TARGET "ElastoPlastic")
+# Set the name of the input msh file
+SET(MSH_FILE "hollowSphere")
 
+# Set the name of the input parameter file
+SET(PARAMETER_FILE "parameter")
 
 SET(TARGET_SRC
   ${TARGET}.cpp
   )
-SET(MSH_FILE "beam_triangulation")
 file(COPY ./msh/${MSH_FILE}.msh DESTINATION ./)
-  
+file(COPY ./${PARAMETER_FILE}.txt DESTINATION ./)  
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
 
 

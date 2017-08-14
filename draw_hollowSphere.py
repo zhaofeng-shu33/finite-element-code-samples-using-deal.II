@@ -200,5 +200,5 @@ if __name__ == '__main__':
     s.recombine()
     #print(s.vertex_list)
     #print(s.triangle_list[refineMementLevel+1])
-    s.write_msh(fileName+'.msh',Layer_Num=refineMementLevel*4)
+    s.write_msh('msh/'+fileName+'.msh',Layer_Num=refineMementLevel*4)
         
