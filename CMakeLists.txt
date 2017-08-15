@@ -3,16 +3,17 @@
 ##
 
 # Set the name of the src file
-SET(TARGET "ElastoPlastic")
+SET(TARGET "practice5")
 # Set the name of the input msh file
-SET(MSH_FILE "hollowSphere")
+SET(MSH_FILE "traction_rod2")
 
 # Set the name of the input parameter file
-SET(PARAMETER_FILE "parameter")
+SET(PARAMETER_FILE "parameter_update")
 
 SET(TARGET_SRC
   ${TARGET}.cpp
   )
+# if needed, copy files to the build directory
 file(COPY ./msh/${MSH_FILE}.msh DESTINATION ./)
 file(COPY ./${PARAMETER_FILE}.txt DESTINATION ./)  
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)

@@ -1,10 +1,10 @@
 inner_radius 1
 outer_radius 2
-MaxNewtonStep 0
+MaxNewtonStep 10
 inner_pressure 3
 YoungModulus 210
 PoissonRatio 0.3
 elementType 1
 quadratureCnt 2
-useSavedSolution 1
+useSavedSolution 0
 yield_strength 2.4

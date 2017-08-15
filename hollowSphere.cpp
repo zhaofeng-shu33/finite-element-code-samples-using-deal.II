@@ -589,7 +589,7 @@ void hollowSphere<dim>::output_results(char* fileName) const//post processing
 }
 int main(int argc)
 {
-	hollowSphere<3> myhollowSphere;
+	hollowSphereOriginal::hollowSphere<3> myhollowSphere;
 	if (argc>1)
 		myhollowSphere.run(true);//use user-defined input mesh file
 	else

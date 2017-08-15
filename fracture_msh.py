@@ -102,4 +102,4 @@ if __name__ == '__main__':
     #s=FractureMesh(h=4,w=6,a=3,h1=1,w1=1)
     s=FractureMesh(h=2,w=1,a=0.2,h1=0.1,w1=0.05)
     s.mesh()
-    s.write_msh('rectangle.msh')
+    s.write_msh('msh/rectangle.msh')

@@ -490,7 +490,7 @@ int main(int argc,char** argv)
 			std::cout << "parse input parameter file successfully." << std::endl;
 		}
 	}
-	hollowSphere<3> myhollowSphere(argv[1],inner_radius,outer_radius,outer_pressure,inner_pressure,YoungModulus,PoissonRatio,elementType,quadratureCnt);
+	hollowSphereUpdate::hollowSphere<3> myhollowSphere(argv[1],inner_radius,outer_radius,outer_pressure,inner_pressure,YoungModulus,PoissonRatio,elementType,quadratureCnt);
 	myhollowSphere.run(useSavedSolution);//use saved solution
 	
 	return 0;

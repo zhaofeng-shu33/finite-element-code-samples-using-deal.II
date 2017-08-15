@@ -1,0 +1,9 @@
+inner_radius 1
+outer_radius 2
+inner_pressure 0.6
+outer_pressure 0.5
+YoungModulus 1
+PoissonRatio 0.1
+elementType 1
+quadratureCnt 2
+useSavedSolution 0

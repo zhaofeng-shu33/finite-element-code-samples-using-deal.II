@@ -6,13 +6,14 @@ namespace TractionRodComputation{
 * no analytical solution available.
 * Displacement Unit:mm.
 */
+    using namespace post_processing;
 template <int dim>
 class TractionRod
 {
-    typedef post_processing::ComputeStressField<dim,TractionRod<dim>> BeamPostProcessing;    
+    typedef ComputeStressField<dim,TractionRod<dim>> BeamPostProcessing;    
 	friend class BeamPostProcessing;
 public:
-	TractionRod(double given_normal_force_per_area);
+	TractionRod(double given_normal_force_per_area,char* inputMshFileName);
 	void run();
 private:
 	static const double YoungModulus;
@@ -39,6 +40,7 @@ private:
 	Vector<double>       solution;
 	Vector<double>       system_rhs;
 	double normal_force_per_area;
+    char mshFileName[20];
 };
 template <int dim>
 const double TractionRod<dim>::YoungModulus = 2.1;
@@ -49,11 +51,12 @@ const double TractionRod<dim>::shearModulus = YoungModulus / (2 * (1 + PoissonRa
 template <int dim>
 const double TractionRod<dim>::LamesFirstParameter = YoungModulus*PoissonRatio / ((1 + PoissonRatio)*(1 - 2 * PoissonRatio));
 template <int dim>
-TractionRod<dim>::TractionRod(double given_normal_force_per_area) :
+TractionRod<dim>::TractionRod(double given_normal_force_per_area,char* inputMshFileName) :
 	fe(FE_Q<dim>(1), dim),
 	dof_handler(triangulation)
 {
 	normal_force_per_area = given_normal_force_per_area;
+    strcpy_s(mshFileName,inputMshFileName);//destination<=src
 }
 template <int dim>
 void TractionRod<dim>::test_boundary() {//Faces with external force with boundary id=1
@@ -143,7 +146,7 @@ void TractionRod<dim>::write_grid(char* fileName) {
 template <int dim>
 void TractionRod<dim>::run()
 {
-	read_grid("traction_rod.msh");
+	read_grid(mshFileName);
 //	test_boundary();
 	//no need to refine the mesh
 		setup_system();
@@ -324,7 +327,7 @@ void TractionRod<dim>::output_results(char* fileName) const//post processing
 {
 	DataOut<dim> data_out;
 	data_out.attach_dof_handler(dof_handler);
-	ComputeStressField<dim> my_stress_field;
+	BeamPostProcessing my_stress_field;
 	data_out.add_data_vector(solution, my_stress_field);
 	data_out.build_patches();
 	std::ofstream output(fileName);
@@ -337,7 +340,12 @@ int main(int argc, char** argv)
 		std::cerr << "no normal force per area is given!";
 		exit(-1);
 	}
-	TractionRodComputation::TractionRod<3> spacial_traction_rod(atof(argv[1]));
+	if (argc == 2) {
+		std::cerr << "no input msh file is given!";
+		exit(-1);
+	}
+    
+	TractionRodComputation::TractionRod<3> spacial_traction_rod(atof(argv[1]),argv[2]);
 	spacial_traction_rod.run();
 	return 0;
 }

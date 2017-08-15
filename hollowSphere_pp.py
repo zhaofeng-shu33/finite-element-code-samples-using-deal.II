@@ -35,7 +35,7 @@ def dp_stress_cal(csvDoc):
 if __name__ == '__main__':    
     fileName=sys.argv[1]
     print(fileName, 'saved')
-    csvDoc = pd.read_csv(fileName+'.csv')
+    csvDoc = pd.read_csv('build/'+fileName+'.csv')
     csvDoc['point'] =np.sqrt((csvDoc['Point:0'])**2 + (csvDoc['Point:1'])**2 + (csvDoc['Point:2'])**2)
     csvDoc['displacement'] =  np.sqrt((csvDoc['x_displacement'])**2 + (csvDoc['y_displacement'])**2 + (csvDoc['z_displacement'])**2)
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     plt.show()
 
     fileName=fileName+'2';
-    csvDoc = pd.read_csv(fileName+'.csv')
+    csvDoc = pd.read_csv('build/'+fileName+'.csv')
     csvDoc['point'] = np.sqrt((csvDoc['Point:0'])**2 + (csvDoc['Point:1'])**2 + (csvDoc['Point:2'])**2)    
     csvDoc.insert(loc=9, column='r_stress', value=0)
     csvDoc.insert(loc=10, column='fi_stress', value=0)
